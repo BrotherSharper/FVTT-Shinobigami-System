@@ -115,7 +115,10 @@
     "Shinobigami.F10": "千里眼の術",
     "Shinobigami.F11": "憑依術",
     "Shinobigami.F12": "呪術",
-    
+
+    "Shinobigami.SelectActor": "プロットを行うアクターを選択してください",
+    "Shinobigami.ReadyPlot": "プロットの選択が完了しました。",
+    "Shinobigami.AwaitPlot": "プロット選択状態が解除されました。",
     
     "SETTINGS.TalentTable": "特技一覧",
     "SETTINGS.TalentTableDesc": "特技一覧変更"
