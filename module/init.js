@@ -5,10 +5,12 @@
  */
 
 // Import Modules
-import { ShinobigamiItemSheet } from "./item-sheet.js";
-import { ShinobigamiActorSheet } from "./actor-sheet.js";
+import { ShinobigamiItemSheet } from "./sheet/item-sheet.js";
+import { ShinobigamiActorSheet } from "./sheet/actor-sheet.js";
 import { SecretJournalSheet } from "./secret-journal.js";
 import { ShinobigamiSettings } from "./settings.js";
+import { PlotCombat } from "./combat.js";
+import { PlotSettings } from "./plot.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -22,13 +24,16 @@ Hooks.once("init", async function() {
     Actors.registerSheet("shinobigami", ShinobigamiActorSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("shinobigami", ShinobigamiItemSheet, {makeDefault: true});
-    
+
+    CONFIG.Combat.documentClass = PlotCombat;
+    CONFIG.Combat.initiative.formula = "1d6";
     CONFIG.JournalEntry.sheetClass = SecretJournalSheet;
     ShinobigamiSettings.init();
     
-    console.log(Actors);
+    PlotSettings.initPlot();
     
 });
+
 
 
 

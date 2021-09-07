@@ -43,7 +43,7 @@ export class SecretJournalSheet extends JournalSheet {
             var secretJournal = game.journal.get(id);
 
             if (secretJournal.owner || secretJournal.hasPerm(game.user, "OBSERVER"))
-                Journal._showEntry(secretJournal.uuid, mode, false);
+                await Journal._showEntry(secretJournal.uuid, mode, false);
             else 
                 throw new Error("You don't have permission");
 
@@ -93,8 +93,9 @@ class SetDialog extends Dialog {
     }
 
     _getContent() {
+	var d = (this.journal.data.flags["shinobigami"] != undefined && this.journal.data.flags["shinobigami"].secret != undefined) ? this.journal.data.flags["shinobigami"].secret.journal.name : "";
         var content = "<p>Input Journal Name<br>";
-        content += `<p><input type="text" id="setJournal" value="${this.journal.data.flags["insane"].secret.journal.name}"></p>Mode: <select id="mode"><option value="text">Text</option><option value="image">Image</option></select></p>`;
+        content += `<p><input type="text" id="setJournal" value="${d}"></p>Mode: <select id="mode"><option value="text">Text</option><option value="image">Image</option></select></p>`;
 
         return content;
     }
@@ -104,6 +105,10 @@ class SetDialog extends Dialog {
         var secret = game.data.journal.find((item) => (item.name == set));
         var mode = $("#mode").val();
 
+	    console.log(set);
+	    console.log(secret);
+	    console.log(mode);
+	    
         if (secret == undefined) {
             await this.journal.unsetFlag("shinobigami", "secret");
             return;
